@@ -12,13 +12,14 @@ async fn main() -> Result<(), tokio_websockets::Error> {
 
     let stdin = tokio::io::stdin();
     let mut stdin = BufReader::new(stdin).lines();
+    println!("Davin's Computer - From server: Welcome to chat! Type a message");
     loop {
         tokio::select! {
             incoming = ws_stream.next() => {
                 match incoming {
                     Some(Ok(msg)) => {
                         if let Some(text) = msg.as_text() {
-                            println!("{}", text);
+                        println!("Davin's Computer - From server: {text}");
                         }
                     },
                     Some(Err(err)) => return Err(err.into()),
